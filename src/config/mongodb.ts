@@ -2,7 +2,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 
 
-const uri = "mongodb+srv://mongodb:mongodb@mazerunner.l4kl7ya.mongodb.net/todosDB?retryWrites=true&w=majority&appName=MazeRunner";
+const uri = "mongodb+srv://:@mazerunner.l4kl7ya.mongodb.net/todosDB?retryWrites=true&w=majority&appName=MazeRunner";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const client = new MongoClient(uri, {
   serverApi: {
