@@ -1,6 +1,8 @@
 
 import app from "./app";
 import { client } from "./config/mongodb";
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 

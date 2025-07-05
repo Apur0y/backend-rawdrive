@@ -16,10 +16,14 @@ exports.todosRoute = void 0;
 const express_1 = __importDefault(require("express"));
 const app_1 = __importDefault(require("../../app"));
 const mongodb_1 = require("../../config/mongodb");
+const mongodb_2 = require("mongodb");
 exports.todosRoute = express_1.default.Router();
-exports.todosRoute.get("/", (req, res) => {
-    res.send("Todo Was here");
-});
+const db = mongodb_1.client.db("todosDB");
+const collection = db.collection("todos");
+exports.todosRoute.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield collection.find({}).toArray();
+    res.send(result);
+}));
 exports.todosRoute.post("/create-todo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const todo = req.body;
     console.log(todo);
@@ -30,13 +34,14 @@ exports.todosRoute.post("/create-todo", (req, res) => __awaiter(void 0, void 0, 
 exports.todosRoute.put("/update-todo/:title", (req, res) => {
     res.send("Todo Was here");
 });
-exports.todosRoute.delete("/:title", (req, res) => {
-    res.send("Todo Was here");
-});
-exports.todosRoute.get('/:id', (req, res) => {
-    const result = req.query;
-    const params = req.params;
-    console.log("My quesry", result);
-    console.log("My params", params);
-});
+exports.todosRoute.delete("/delete-todo/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const td = yield collection.deleteOne({ _id: new mongodb_2.ObjectId(id) });
+    res.send(td);
+}));
+exports.todosRoute.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const td = yield collection.findOne({ _id: new mongodb_2.ObjectId(id) });
+    res.send(td);
+}));
 exports.default = app_1.default;

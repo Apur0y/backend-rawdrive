@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const mongodb_1 = require("./config/mongodb");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 let server;
 const port = 3000;
 const bootstrap = () => __awaiter(void 0, void 0, void 0, function* () {
